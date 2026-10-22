@@ -5,68 +5,126 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0F5132">
+<meta name="description" content="VAYRO — сервис взаимопомощи. Найди помощь или помоги соседям.">
 <title>VAYRO — Помощь ближе</title>
 <style>
-:root{--green:#0F5132;--mint:#4CAF7A;--cream:#FAFAF8;--text:#17231C;--muted:#788078;--line:#E7EBE5}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--text)}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-header{background:var(--green);color:white;padding:18px 18px 34px;border-radius:0 0 26px 26px}
-.top{max-width:850px;margin:auto;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:27px;font-weight:850;letter-spacing:2px}
-.tag{font-size:11px;color:#C7E8D3;margin-top:2px}
-.pill{background:#FFFFFF1C;color:white;border:1px solid #FFFFFF40;border-radius:30px;padding:9px 12px;font-size:12px}
-.hero{max-width:850px;margin:38px auto 0}
-.eyebrow{color:#B9E6CA;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
-h1{font-size:clamp(32px,7vw,48px);line-height:1.08;letter-spacing:-1.5px;max-width:560px;margin:12px 0}
-.hero p{color:#D7E8DC;line-height:1.6;max-width:450px}
-.primary{border:0;border-radius:13px;padding:14px 18px;background:var(--mint);color:white;font-weight:750}
-.secondary{border:1px solid var(--line);background:white;border-radius:13px;padding:13px 16px;font-weight:650}
-.hero .secondary{background:transparent;color:white;border-color:#FFFFFF55}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-main{max-width:850px;margin:auto;padding:25px 16px 60px}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}
-h2{font-size:22px;margin:0;letter-spacing:-.5px}
-.sub{color:var(--muted);font-size:13px;margin-top:6px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:30px}
-.stat{background:white;border:1px solid var(--line);border-radius:16px;padding:15px 10px}
-.stat strong{display:block;color:var(--green);font-size:20px}
-.stat span{font-size:11px;color:var(--muted)}
-.filters{display:flex;gap:8px;overflow-x:auto;padding:2px 0 15px}
-.filter{flex-shrink:0;border:1px solid var(--line);border-radius:30px;background:white;padding:9px 14px;color:#5D665E;font-size:13px}
-.filter.active{background:var(--green);color:white;border-color:var(--green)}
-.tasks{display:grid;gap:12px}
-.task{background:white;border:1px solid var(--line);border-radius:18px;padding:17px}
-.task-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
-.task h3{margin:0;font-size:17px;line-height:1.35}
-.price{color:var(--green);font-weight:800;white-space:nowrap}
-.task p{font-size:13px;line-height:1.55;color:#626B63;margin:10px 0 15px}
-.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
-.meta span{font-size:11px;padding:6px 9px;background:#F2F5F0;border-radius:30px;color:#626B63}
-.task-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.kind{font-size:11px;font-weight:750;color:var(--green)}
-.respond{border:0;background:#E7F4EB;color:var(--green);padding:10px 13px;border-radius:10px;font-weight:700;font-size:12px}
-.empty{padding:30px 15px;text-align:center;color:var(--muted);background:white;border-radius:16px}
-.note{margin-top:24px;background:#EEF5EE;border-radius:16px;padding:17px;font-size:13px;line-height:1.6;color:#45614C}
-footer{border-top:1px solid var(--line);text-align:center;padding:24px 16px;color:var(--muted);font-size:12px}
-dialog{border:0;border-radius:20px;padding:23px;width:calc(100% - 28px);max-width:470px;box-shadow:0 20px 70px #0003}
-dialog::backdrop{background:#0B2117A6}
-dialog h2{margin-bottom:18px}
-.field{display:grid;gap:6px;margin:13px 0}
-.field label{font-size:12px;font-weight:700}
-.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#FCFCFA;color:var(--text)}
-.field textarea{min-height:80px;resize:vertical}
-.dialog-actions{display:flex;gap:9px;margin-top:18px}
-.dialog-actions button{flex:1}
-@media(min-width:650px){.tasks{grid-template-columns:1fr 1fr}header{padding-left:28px;padding-right:28px}main{padding-left:24px;padding-right:24px}}
+:root {
+  --green:#0F5132;
+  --mint:#4CAF7A;
+  --cream:#FAFAF8;
+  --text:#17231C;
+  --muted:#788078;
+  --line:#E7EBE5;
+}
+* { box-sizing:border-box }
+body {
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--cream);
+  color:var(--text);
+}
+button,input,textarea,select { font:inherit }
+button { cursor:pointer }
+button:disabled { opacity:.6; cursor:wait }
+header {
+  background:var(--green);
+  color:white;
+  padding:18px 18px 34px;
+  border-radius:0 0 26px 26px;
+}
+.top {
+  max-width:850px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.logo { font-size:27px;font-weight:850;letter-spacing:2px }
+.tag { font-size:11px;color:#C7E8D3;margin-top:2px }
+.pill {
+  background:#FFFFFF1C;color:white;border:1px solid #FFFFFF40;
+  border-radius:30px;padding:9px 12px;font-size:12px;
+}
+.hero { max-width:850px;margin:38px auto 0 }
+.eyebrow {
+  color:#B9E6CA;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+h1 {
+  font-size:clamp(32px,7vw,48px);line-height:1.08;
+  letter-spacing:-1.5px;max-width:560px;margin:12px 0;
+}
+.hero p { color:#D7E8DC;line-height:1.6;max-width:450px }
+.primary {
+  border:0;border-radius:13px;padding:14px 18px;
+  background:var(--mint);color:white;font-weight:750;
+}
+.secondary {
+  border:1px solid var(--line);background:white;
+  border-radius:13px;padding:13px 16px;font-weight:650;
+}
+.hero .secondary { background:transparent;color:white;border-color:#FFFFFF55 }
+.actions { display:flex;flex-wrap:wrap;gap:10px;margin-top:22px }
+main { max-width:850px;margin:auto;padding:25px 16px 60px }
+.section-head {
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:15px;
+}
+h2 { font-size:22px;margin:0;letter-spacing:-.5px }
+.sub { color:var(--muted);font-size:13px;margin-top:6px }
+.stats { display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:30px }
+.stat { background:white;border:1px solid var(--line);border-radius:16px;padding:15px 10px }
+.stat strong { display:block;color:var(--green);font-size:20px }
+.stat span { font-size:11px;color:var(--muted) }
+.filters { display:flex;gap:8px;overflow-x:auto;padding:2px 0 15px }
+.filter {
+  flex-shrink:0;border:1px solid var(--line);border-radius:30px;
+  background:white;padding:9px 14px;color:#5D665E;font-size:13px;
+}
+.filter.active { background:var(--green);color:white;border-color:var(--green) }
+.tasks { display:grid;gap:12px }
+.task { background:white;border:1px solid var(--line);border-radius:18px;padding:17px }
+.task-top { display:flex;justify-content:space-between;gap:10px;align-items:start }
+.task h3 { margin:0;font-size:17px;line-height:1.35;overflow-wrap:anywhere }
+.price { color:var(--green);font-weight:800;white-space:nowrap }
+.task p { font-size:13px;line-height:1.55;color:#626B63;margin:10px 0 15px;white-space:pre-wrap;overflow-wrap:anywhere }
+.meta { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px }
+.meta span { font-size:11px;padding:6px 9px;background:#F2F5F0;border-radius:30px;color:#626B63 }
+.task-bottom { display:flex;justify-content:space-between;align-items:center;gap:10px }
+.kind { font-size:11px;font-weight:750;color:var(--green) }
+.respond { border:0;background:#E7F4EB;color:var(--green);padding:10px 13px;border-radius:10px;font-weight:700;font-size:12px }
+.empty { padding:30px 15px;text-align:center;color:var(--muted);background:white;border-radius:16px }
+.note { margin-top:24px;background:#EEF5EE;border-radius:16px;padding:17px;font-size:13px;line-height:1.6;color:#45614C }
+.status { margin:0 0 15px;font-size:13px;line-height:1.5;color:var(--muted) }
+footer { border-top:1px solid var(--line);text-align:center;padding:24px 16px;color:var(--muted);font-size:12px }
+dialog { border:0;border-radius:20px;padding:23px;width:calc(100% - 28px);max-width:470px;box-shadow:0 20px 70px #0003;max-height:90vh;overflow-y:auto }
+dialog::backdrop { background:#0B2117A6 }
+dialog h2 { margin-bottom:18px }
+.field { display:grid;gap:6px;margin:13px 0 }
+.field label { font-size:12px;font-weight:700 }
+.field input,.field textarea,.field select {
+  width:100%;border:1px solid var(--line);border-radius:11px;
+  padding:12px;background:#FCFCFA;color:var(--text);
+}
+.field textarea { min-height:80px;resize:vertical }
+.dialog-actions { display:flex;gap:9px;margin-top:18px }
+.dialog-actions button { flex:1 }
+@media(min-width:650px) {
+  .tasks { grid-template-columns:1fr 1fr }
+  header { padding-left:28px;padding-right:28px }
+  main { padding-left:24px;padding-right:24px }
+}
 </style>
 </head>
 <body>
 <header>
   <div class="top">
-    <div><div class="logo">VAYRO</div><div class="tag">Помощь ближе</div></div>
-    <button class="pill" id="myTasks">Мои объявления</button>
+    <div>
+      <div class="logo">VAYRO</div>
+      <div class="tag">Помощь ближе</div>
+    </div>
+    <button class="pill" id="myTasks">Только реальные</button>
   </div>
   <div class="hero">
     <div class="eyebrow">Люди помогают людям</div>
@@ -78,13 +136,23 @@ dialog h2{margin-bottom:18px}
     </div>
   </div>
 </header>
+
 <main id="board">
   <div class="stats">
-    <div class="stat"><strong id="totalCount">0</strong><span>Заданий</span></div>
+    <div class="stat"><strong id="totalCount">0</strong><span>Реальных заданий</span></div>
     <div class="stat"><strong>Рядом</strong><span>В твоём городе</span></div>
     <div class="stat"><strong>Вместе</strong><span>Проще справляться</span></div>
   </div>
-  <div class="section-head"><div><h2>Задания рядом</h2><div class="sub">Выбери дело, с которым можешь помочь</div></div></div>
+
+  <div class="section-head">
+    <div>
+      <h2>Задания рядом</h2>
+      <div class="sub">Выбери дело, с которым можешь помочь</div>
+    </div>
+  </div>
+
+  <p class="status" id="status">Подключаемся к базе объявлений…</p>
+
   <div class="filters" id="filters">
     <button class="filter active" data-filter="all">Все</button>
     <button class="filter" data-filter="free">Бесплатно</button>
@@ -93,86 +161,309 @@ dialog h2{margin-bottom:18px}
     <button class="filter" data-filter="home">По дому</button>
     <button class="filter" data-filter="other">Другое</button>
   </div>
+
   <div class="tasks" id="tasks"></div>
-  <div class="note"><strong>Как работает VAYRO?</strong><br>Найди подходящее задание, свяжись с автором и договорись о деталях. Или размести своё задание, чтобы найти помощника.</div>
+
+  <div class="note">
+    <strong>Как работает VAYRO?</strong><br>
+    Найди подходящее задание и договорись с автором. Или размести своё задание, чтобы найти помощника.
+    Пока отклики и личные сообщения не подключены.
+  </div>
 </main>
-<footer>VAYRO · Помощь ближе<br>Демо-версия проекта</footer>
+
+<footer>VAYRO · Помощь ближе<br>Первая версия</footer>
+
 <dialog id="taskDialog">
   <h2>Новое задание</h2>
   <form id="taskForm">
-    <div class="field"><label for="title">Что нужно сделать?</label><input id="title" maxlength="70" required placeholder="Например, помочь перевезти вещи"></div>
-    <div class="field"><label for="description">Подробности</label><textarea id="description" maxlength="400" required placeholder="Опиши, какая помощь нужна"></textarea></div>
-    <div class="field"><label for="city">Город или район</label><input id="city" maxlength="60" required placeholder="Например, Курчалой"></div>
-    <div class="field"><label for="type">Вид задания</label><select id="type"><option value="free">Бесплатно</option><option value="paid">За оплату</option></select></div>
-    <div class="field" id="priceField" hidden><label for="price">Оплата в рублях</label><input id="price" type="number" min="1" max="1000000" placeholder="Например, 500"></div>
-    <div class="field"><label for="category">Категория</label><select id="category"><option value="other">Другое</option><option value="transport">Транспорт</option><option value="home">По дому</option></select></div>
-    <div class="dialog-actions"><button type="button" class="secondary" id="cancel">Отмена</button><button type="submit" class="primary">Опубликовать</button></div>
+    <div class="field">
+      <label for="title">Что нужно сделать?</label>
+      <input id="title" maxlength="70" required placeholder="Например, помочь перевезти вещи">
+    </div>
+    <div class="field">
+      <label for="description">Подробности</label>
+      <textarea id="description" maxlength="400" required placeholder="Опиши, какая помощь нужна"></textarea>
+    </div>
+    <div class="field">
+      <label for="city">Город или район</label>
+      <input id="city" maxlength="60" required placeholder="Например, Курчалой">
+    </div>
+    <div class="field">
+      <label for="type">Вид задания</label>
+      <select id="type">
+        <option value="free">Бесплатно</option>
+        <option value="paid">За оплату</option>
+      </select>
+    </div>
+    <div class="field" id="priceField" hidden>
+      <label for="price">Оплата в рублях</label>
+      <input id="price" type="number" min="1" max="1000000" placeholder="Например, 500">
+    </div>
+    <div class="field">
+      <label for="category">Категория</label>
+      <select id="category">
+        <option value="other">Другое</option>
+        <option value="transport">Транспорт</option>
+        <option value="home">По дому</option>
+      </select>
+    </div>
+    <div class="dialog-actions">
+      <button type="button" class="secondary" id="cancel">Отмена</button>
+      <button type="submit" class="primary">Опубликовать</button>
+    </div>
   </form>
 </dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const starterTasks=[
-{id:1,title:"Помочь донести покупки",description:"Нужно помочь пожилому соседу донести пакеты до квартиры.",city:"Курчалой",type:"free",price:0,category:"other",demo:true},
-{id:2,title:"Помощь с переездом",description:"Нужен человек, чтобы помочь перенести несколько коробок.",city:"Грозный",type:"paid",price:1000,category:"home",demo:true},
-{id:3,title:"Прикурить автомобиль",description:"Машина не заводится. Нужны провода и помощь с запуском.",city:"Курчалой",type:"free",price:0,category:"transport",demo:true}
+const SUPABASE_URL = "https://ignnngpkdwisofagjaek.supabase.co";
+const SUPABASE_KEY = "sb_publishable_AQrdshPKxMBiC7TPjA9RAg_mNTky7kg";
+
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const starterTasks = [
+  {
+    id:"demo1",
+    title:"Помочь донести покупки",
+    description:"Нужно помочь пожилому соседу донести пакеты до квартиры.",
+    city:"Курчалой",type:"free",price:0,category:"other",demo:true
+  },
+  {
+    id:"demo2",
+    title:"Помощь с переездом",
+    description:"Нужен человек, чтобы помочь перенести несколько коробок.",
+    city:"Грозный",type:"paid",price:1000,category:"home",demo:true
+  },
+  {
+    id:"demo3",
+    title:"Прикурить автомобиль",
+    description:"Машина не заводится. Нужны провода и помощь с запуском.",
+    city:"Курчалой",type:"free",price:0,category:"transport",demo:true
+  }
 ];
-let tasks=[];
-try{tasks=JSON.parse(localStorage.getItem("vayro_tasks")||"null")||starterTasks}catch(e){tasks=starterTasks}
-let activeFilter="all",mineOnly=false;
-const tasksBox=document.getElementById("tasks");
-const dialog=document.getElementById("taskDialog");
-const form=document.getElementById("taskForm");
-function save(){try{localStorage.setItem("vayro_tasks",JSON.stringify(tasks))}catch(e){}}
-function render(){
- const shown=tasks.filter(t=>(activeFilter==="all"||activeFilter===t.type||activeFilter===t.category)&&(!mineOnly||!t.demo));
- document.getElementById("totalCount").textContent=tasks.length;
- tasksBox.innerHTML="";
- if(!shown.length){tasksBox.innerHTML='<div class="empty">Заданий пока нет. Можно разместить первое!</div>';return}
- shown.forEach(t=>{
-  const article=document.createElement("article");article.className="task";
-  const top=document.createElement("div");top.className="task-top";
-  const heading=document.createElement("h3");heading.textContent=t.title;
-  const price=document.createElement("div");price.className="price";price.textContent=t.type==="paid"?Number(t.price).toLocaleString("ru-RU")+" ₽":"Бесплатно";
-  top.append(heading,price);
-  const desc=document.createElement("p");desc.textContent=t.description;
-  const meta=document.createElement("div");meta.className="meta";
-  const city=document.createElement("span");city.textContent="⌖ "+t.city;
-  const category=document.createElement("span");category.textContent=({transport:"Транспорт",home:"По дому",other:"Другое"})[t.category]||"Другое";
-  meta.append(city,category);
-  const bottom=document.createElement("div");bottom.className="task-bottom";
-  const kind=document.createElement("span");kind.className="kind";kind.textContent=t.demo?"ПРИМЕР":"ВАШЕ ЗАДАНИЕ";
-  const reply=document.createElement("button");reply.className="respond";reply.textContent="Откликнуться";
-  reply.addEventListener("click",()=>alert("Это демонстрационная версия VAYRO. Настоящие сообщения и отклики подключим на следующем этапе."));
-  bottom.append(kind,reply);article.append(top,desc,meta,bottom);tasksBox.append(article);
- });
+
+let tasks = [...starterTasks];
+let activeFilter = "all";
+let realOnly = false;
+let loading = false;
+
+const tasksBox = document.getElementById("tasks");
+const dialog = document.getElementById("taskDialog");
+const form = document.getElementById("taskForm");
+const statusBox = document.getElementById("status");
+
+function setStatus(message) {
+  statusBox.textContent = message;
 }
-function openForm(){form.reset();document.getElementById("priceField").hidden=true;dialog.showModal()}
-document.getElementById("addTop").addEventListener("click",openForm);
-document.getElementById("browse").addEventListener("click",()=>document.getElementById("board").scrollIntoView({behavior:"smooth"}));
-document.getElementById("cancel").addEventListener("click",()=>dialog.close());
-document.getElementById("myTasks").addEventListener("click",()=>{
- mineOnly=!mineOnly;document.getElementById("myTasks").textContent=mineOnly?"Все задания":"Мои объявления";render();document.getElementById("board").scrollIntoView({behavior:"smooth"});
+
+function render() {
+  const shown = tasks.filter(t =>
+    (!realOnly || !t.demo) &&
+    (activeFilter === "all" ||
+     activeFilter === t.type ||
+     activeFilter === t.category)
+  );
+
+  document.getElementById("totalCount").textContent =
+    tasks.filter(t => !t.demo).length;
+
+  tasksBox.innerHTML = "";
+
+  if (!shown.length) {
+    tasksBox.innerHTML =
+      '<div class="empty">Заданий пока нет. Можно разместить первое!</div>';
+    return;
+  }
+
+  shown.forEach(t => {
+    const article = document.createElement("article");
+    article.className = "task";
+
+    const top = document.createElement("div");
+    top.className = "task-top";
+
+    const heading = document.createElement("h3");
+    heading.textContent = t.title;
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = t.type === "paid"
+      ? Number(t.price || 0).toLocaleString("ru-RU") + " ₽"
+      : "Бесплатно";
+
+    top.append(heading, price);
+
+    const desc = document.createElement("p");
+    desc.textContent = t.description || "";
+
+    const meta = document.createElement("div");
+    meta.className = "meta";
+
+    const city = document.createElement("span");
+    city.textContent = "⌖ " + (t.city || "Город не указан");
+
+    const category = document.createElement("span");
+    category.textContent = ({
+      transport:"Транспорт",
+      home:"По дому",
+      other:"Другое"
+    })[t.category] || "Другое";
+
+    meta.append(city, category);
+
+    const bottom = document.createElement("div");
+    bottom.className = "task-bottom";
+
+    const kind = document.createElement("span");
+    kind.className = "kind";
+    kind.textContent = t.demo ? "ПРИМЕР" : "ОПУБЛИКОВАНО";
+
+    const reply = document.createElement("button");
+    reply.className = "respond";
+    reply.textContent = "Откликнуться";
+    reply.addEventListener("click", () => {
+      alert("Отклики и связь с автором появятся в следующем обновлении VAYRO.");
+    });
+
+    bottom.append(kind, reply);
+    article.append(top, desc, meta, bottom);
+    tasksBox.append(article);
+  });
+}
+
+async function loadTasks() {
+  setStatus("Загружаем объявления…");
+
+  try {
+    const {data, error} = await db
+      .from("tasks")
+      .select("id,title,description,city,type,price,category,created_at")
+      .order("created_at", {ascending:false});
+
+    if (error) throw error;
+
+    tasks = [...starterTasks, ...(data || []).map(t => ({
+      ...t,
+      type:t.type || "free",
+      price:Number(t.price || 0),
+      category:t.category || "other",
+      demo:false
+    }))];
+
+    setStatus("Объявления загружены.");
+  } catch (error) {
+    console.error("Supabase load error:", error);
+    tasks = [...starterTasks];
+    setStatus("Не удалось подключиться к базе. Проверь настройки Supabase и подключение к интернету.");
+  }
+
+  render();
+}
+
+function openForm() {
+  form.reset();
+  document.getElementById("priceField").hidden = true;
+  dialog.showModal();
+}
+
+document.getElementById("addTop").addEventListener("click", openForm);
+
+document.getElementById("browse").addEventListener("click", () => {
+  document.getElementById("board").scrollIntoView({behavior:"smooth"});
 });
-document.getElementById("type").addEventListener("change",e=>document.getElementById("priceField").hidden=e.target.value!=="paid");
-document.getElementById("filters").addEventListener("click",e=>{
- const btn=e.target.closest("[data-filter]");if(!btn)return;
- activeFilter=btn.dataset.filter;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===btn));render();
+
+document.getElementById("cancel").addEventListener("click", () => dialog.close());
+
+document.getElementById("myTasks").addEventListener("click", () => {
+  realOnly = !realOnly;
+  document.getElementById("myTasks").textContent =
+    realOnly ? "Показать примеры" : "Только реальные";
+  render();
 });
-form.addEventListener("submit",e=>{
- e.preventDefault();
- const type=document.getElementById("type").value;
- const price=Number(document.getElementById("price").value||0);
- if(type==="paid"&&price<=0){alert("Укажи сумму оплаты.");return}
- tasks.unshift({
- id:Date.now(),title:document.getElementById("title").value.trim(),
- description:document.getElementById("description").value.trim(),
- city:document.getElementById("city").value.trim(),type,
- price:type==="paid"?price:0,category:document.getElementById("category").value,demo:false
- });
- save();mineOnly=false;document.getElementById("myTasks").textContent="Мои объявления";
- activeFilter="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
- dialog.close();render();
+
+document.getElementById("type").addEventListener("change", e => {
+  document.getElementById("priceField").hidden = e.target.value !== "paid";
 });
-render();
+
+document.getElementById("filters").addEventListener("click", e => {
+  const btn = e.target.closest("[data-filter]");
+  if (!btn) return;
+
+  activeFilter = btn.dataset.filter;
+
+  document.querySelectorAll(".filter").forEach(b =>
+    b.classList.toggle("active", b === btn)
+  );
+
+  render();
+});
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  if (loading) return;
+
+  const type = document.getElementById("type").value;
+  const price = Number(document.getElementById("price").value || 0);
+
+  if (type === "paid" && (!Number.isFinite(price) || price <= 0)) {
+    alert("Укажи сумму оплаты.");
+    return;
+  }
+
+  const task = {
+    title:document.getElementById("title").value.trim(),
+    description:document.getElementById("description").value.trim(),
+    city:document.getElementById("city").value.trim(),
+    type,
+    price:type === "paid" ? price : 0,
+    category:document.getElementById("category").value
+  };
+
+  if (!task.title || !task.description || !task.city) {
+    alert("Заполни все обязательные поля.");
+    return;
+  }
+
+  loading = true;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Публикуем…";
+  setStatus("Сохраняем объявление…");
+
+  try {
+    const {error} = await db.from("tasks").insert(task);
+
+    if (error) throw error;
+
+    dialog.close();
+    form.reset();
+    document.getElementById("priceField").hidden = true;
+
+    activeFilter = "all";
+    realOnly = true;
+    document.getElementById("myTasks").textContent = "Показать примеры";
+
+    document.querySelectorAll(".filter").forEach(b =>
+      b.classList.toggle("active", b.dataset.filter === "all")
+    );
+
+    await loadTasks();
+    setStatus("Задание опубликовано!");
+    document.getElementById("board").scrollIntoView({behavior:"smooth"});
+  } catch (error) {
+    console.error("Supabase insert error:", error);
+    setStatus("Ошибка публикации.");
+    alert("Не удалось сохранить задание: " + (error.message || "проверь настройки Supabase"));
+  } finally {
+    loading = false;
+    submitButton.disabled = false;
+    submitButton.textContent = "Опубликовать";
+  }
+});
+
+loadTasks();
 </script>
 </body>
 </html>
