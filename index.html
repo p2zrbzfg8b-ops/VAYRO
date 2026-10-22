@@ -7,110 +7,173 @@
 <meta name="theme-color" content="#0F5132">
 <title>VAYRO — Помощь ближе</title>
 <style>
-:root{--green:#0F5132;--mint:#4CAF7A;--bg:#FAFAF8;--text:#17251d}
+:root{--green:#0F5132;--mint:#4CAF7A;--cream:#FAFAF8;--text:#17231C;--muted:#788078;--line:#E7EBE5}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
-header{background:var(--green);color:white;padding:25px 18px 30px;border-radius:0 0 24px 24px}
-nav{display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:27px;font-weight:800;letter-spacing:2px}
-.tag{font-size:12px;opacity:.8}
-h1{font-size:28px;line-height:1.2;margin:28px 0 8px}
-header p{color:#e0eee5;font-size:14px;line-height:1.5}
-main{max-width:650px;margin:auto;padding:20px 16px}
-.actions{display:flex;gap:10px;margin:18px 0}
-button{border:0;border-radius:12px;padding:13px 15px;font-weight:700;font-size:14px;cursor:pointer}
-.primary{background:var(--mint);color:#082d1b}
-.secondary{background:white;color:var(--green);border:1px solid #dce7df}
-.filters{display:flex;gap:8px;overflow:auto;margin:20px 0}
-.filters button{white-space:nowrap;background:#eee}
-.filters button.active{background:var(--green);color:white}
-h2{font-size:20px}
-.task{background:white;border:1px solid #e7e9e5;border-radius:16px;padding:16px;margin:12px 0}
-.task h3{margin:0 0 8px;font-size:17px}
-.task p{font-size:14px;line-height:1.5;color:#59645c}
-.meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#68756b;margin:12px 0}
-.price{font-weight:800;color:var(--green);font-size:15px}
-.badge{background:#e5f4e9;color:var(--green);padding:5px 8px;border-radius:8px;font-size:11px}
-.task button{width:100%;background:#edf5ef;color:var(--green)}
-footer{text-align:center;color:#758078;font-size:12px;padding:25px}
-input,textarea,select{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:10px;margin:7px 0 12px;font:inherit}
-label{font-size:13px;font-weight:700}
-dialog{width:calc(100% - 30px);max-width:440px;border:0;border-radius:18px;padding:22px}
-dialog::backdrop{background:#0008}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--text)}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{background:var(--green);color:white;padding:18px 18px 34px;border-radius:0 0 26px 26px}
+.top{max-width:850px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:850;letter-spacing:2px}
+.tag{font-size:11px;color:#C7E8D3;margin-top:2px}
+.pill{background:#FFFFFF1C;color:white;border:1px solid #FFFFFF40;border-radius:30px;padding:9px 12px;font-size:12px}
+.hero{max-width:850px;margin:38px auto 0}
+.eyebrow{color:#B9E6CA;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+h1{font-size:clamp(32px,7vw,48px);line-height:1.08;letter-spacing:-1.5px;max-width:560px;margin:12px 0}
+.hero p{color:#D7E8DC;line-height:1.6;max-width:450px}
+.primary{border:0;border-radius:13px;padding:14px 18px;background:var(--mint);color:white;font-weight:750}
+.secondary{border:1px solid var(--line);background:white;border-radius:13px;padding:13px 16px;font-weight:650}
+.hero .secondary{background:transparent;color:white;border-color:#FFFFFF55}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+main{max-width:850px;margin:auto;padding:25px 16px 60px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}
+h2{font-size:22px;margin:0;letter-spacing:-.5px}
+.sub{color:var(--muted);font-size:13px;margin-top:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:30px}
+.stat{background:white;border:1px solid var(--line);border-radius:16px;padding:15px 10px}
+.stat strong{display:block;color:var(--green);font-size:20px}
+.stat span{font-size:11px;color:var(--muted)}
+.filters{display:flex;gap:8px;overflow-x:auto;padding:2px 0 15px}
+.filter{flex-shrink:0;border:1px solid var(--line);border-radius:30px;background:white;padding:9px 14px;color:#5D665E;font-size:13px}
+.filter.active{background:var(--green);color:white;border-color:var(--green)}
+.tasks{display:grid;gap:12px}
+.task{background:white;border:1px solid var(--line);border-radius:18px;padding:17px}
+.task-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.task h3{margin:0;font-size:17px;line-height:1.35}
+.price{color:var(--green);font-weight:800;white-space:nowrap}
+.task p{font-size:13px;line-height:1.55;color:#626B63;margin:10px 0 15px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:15px}
+.meta span{font-size:11px;padding:6px 9px;background:#F2F5F0;border-radius:30px;color:#626B63}
+.task-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kind{font-size:11px;font-weight:750;color:var(--green)}
+.respond{border:0;background:#E7F4EB;color:var(--green);padding:10px 13px;border-radius:10px;font-weight:700;font-size:12px}
+.empty{padding:30px 15px;text-align:center;color:var(--muted);background:white;border-radius:16px}
+.note{margin-top:24px;background:#EEF5EE;border-radius:16px;padding:17px;font-size:13px;line-height:1.6;color:#45614C}
+footer{border-top:1px solid var(--line);text-align:center;padding:24px 16px;color:var(--muted);font-size:12px}
+dialog{border:0;border-radius:20px;padding:23px;width:calc(100% - 28px);max-width:470px;box-shadow:0 20px 70px #0003}
+dialog::backdrop{background:#0B2117A6}
+dialog h2{margin-bottom:18px}
+.field{display:grid;gap:6px;margin:13px 0}
+.field label{font-size:12px;font-weight:700}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#FCFCFA;color:var(--text)}
+.field textarea{min-height:80px;resize:vertical}
+.dialog-actions{display:flex;gap:9px;margin-top:18px}
+.dialog-actions button{flex:1}
+@media(min-width:650px){.tasks{grid-template-columns:1fr 1fr}header{padding-left:28px;padding-right:28px}main{padding-left:24px;padding-right:24px}}
 </style>
 </head>
 <body>
 <header>
-<nav><div class="logo">VAYRO</div><div class="tag">ПОМОЩЬ БЛИЖЕ</div></nav>
-<h1>Помощь рядом.<br>Возможности для каждого.</h1>
-<p>Находи помощь, помогай другим и выполняй задания за вознаграждение.</p>
-<div class="actions">
-<button class="primary" onclick="document.querySelector('#create').showModal()">+ Создать задание</button>
-<button class="secondary" onclick="document.querySelector('#tasks').scrollIntoView({behavior:'smooth'})">Найти помощь</button>
-</div>
+  <div class="top">
+    <div><div class="logo">VAYRO</div><div class="tag">Помощь ближе</div></div>
+    <button class="pill" id="myTasks">Мои объявления</button>
+  </div>
+  <div class="hero">
+    <div class="eyebrow">Люди помогают людям</div>
+    <h1>Нужна помощь?<br>Она ближе, чем кажется.</h1>
+    <p>Найди человека для небольшого дела или предложи свою помощь соседям.</p>
+    <div class="actions">
+      <button class="primary" id="addTop">+ Разместить задание</button>
+      <button class="secondary" id="browse">Найти помощь</button>
+    </div>
+  </div>
 </header>
-<main id="tasks">
-<h2>Задания рядом</h2>
-<div class="filters">
-<button class="active" data-filter="all">Все</button>
-<button data-filter="free">Бесплатные</button>
-<button data-filter="paid">Платные</button>
-</div>
-<div id="list"></div>
+<main id="board">
+  <div class="stats">
+    <div class="stat"><strong id="totalCount">0</strong><span>Заданий</span></div>
+    <div class="stat"><strong>Рядом</strong><span>В твоём городе</span></div>
+    <div class="stat"><strong>Вместе</strong><span>Проще справляться</span></div>
+  </div>
+  <div class="section-head"><div><h2>Задания рядом</h2><div class="sub">Выбери дело, с которым можешь помочь</div></div></div>
+  <div class="filters" id="filters">
+    <button class="filter active" data-filter="all">Все</button>
+    <button class="filter" data-filter="free">Бесплатно</button>
+    <button class="filter" data-filter="paid">За оплату</button>
+    <button class="filter" data-filter="transport">Транспорт</button>
+    <button class="filter" data-filter="home">По дому</button>
+    <button class="filter" data-filter="other">Другое</button>
+  </div>
+  <div class="tasks" id="tasks"></div>
+  <div class="note"><strong>Как работает VAYRO?</strong><br>Найди подходящее задание, свяжись с автором и договорись о деталях. Или размести своё задание, чтобы найти помощника.</div>
 </main>
-<footer>VAYRO © 2026 · Помощь ближе</footer>
-
-<dialog id="create">
-<h2>Новое задание</h2>
-<form id="taskForm">
-<label>Название</label><input name="title" required maxlength="80" placeholder="Например, помочь донести вещи">
-<label>Описание</label><textarea name="description" required maxlength="500" placeholder="Что нужно сделать?"></textarea>
-<label>Город</label><input name="city" required placeholder="Например, Курчалой">
-<label>Тип задания</label>
-<select name="type"><option value="free">Бесплатная помощь</option><option value="paid">За вознаграждение</option></select>
-<label>Вознаграждение (₽, если платное)</label><input name="price" type="number" min="0" placeholder="500">
-<div class="actions"><button class="primary" type="submit">Опубликовать</button><button class="secondary" type="button" onclick="document.querySelector('#create').close()">Отмена</button></div>
-</form>
+<footer>VAYRO · Помощь ближе<br>Демо-версия проекта</footer>
+<dialog id="taskDialog">
+  <h2>Новое задание</h2>
+  <form id="taskForm">
+    <div class="field"><label for="title">Что нужно сделать?</label><input id="title" maxlength="70" required placeholder="Например, помочь перевезти вещи"></div>
+    <div class="field"><label for="description">Подробности</label><textarea id="description" maxlength="400" required placeholder="Опиши, какая помощь нужна"></textarea></div>
+    <div class="field"><label for="city">Город или район</label><input id="city" maxlength="60" required placeholder="Например, Курчалой"></div>
+    <div class="field"><label for="type">Вид задания</label><select id="type"><option value="free">Бесплатно</option><option value="paid">За оплату</option></select></div>
+    <div class="field" id="priceField" hidden><label for="price">Оплата в рублях</label><input id="price" type="number" min="1" max="1000000" placeholder="Например, 500"></div>
+    <div class="field"><label for="category">Категория</label><select id="category"><option value="other">Другое</option><option value="transport">Транспорт</option><option value="home">По дому</option></select></div>
+    <div class="dialog-actions"><button type="button" class="secondary" id="cancel">Отмена</button><button type="submit" class="primary">Опубликовать</button></div>
+  </form>
 </dialog>
 <script>
-const initial=[
-{title:"Помочь донести покупки",description:"Нужно помочь пожилому человеку донести пакеты до дома.",city:"Курчалой",type:"free",price:0},
-{title:"Помощь с переездом",description:"Нужен человек на пару часов, чтобы перенести коробки.",city:"Курчалой",type:"paid",price:1000},
-{title:"Купить продукты соседу",description:"Купить продукты по списку и принести по адресу.",city:"Курчалой",type:"paid",price:500}
+const starterTasks=[
+{id:1,title:"Помочь донести покупки",description:"Нужно помочь пожилому соседу донести пакеты до квартиры.",city:"Курчалой",type:"free",price:0,category:"other",demo:true},
+{id:2,title:"Помощь с переездом",description:"Нужен человек, чтобы помочь перенести несколько коробок.",city:"Грозный",type:"paid",price:1000,category:"home",demo:true},
+{id:3,title:"Прикурить автомобиль",description:"Машина не заводится. Нужны провода и помощь с запуском.",city:"Курчалой",type:"free",price:0,category:"transport",demo:true}
 ];
-let tasks;
-try{tasks=JSON.parse(localStorage.getItem("vayroTasks"))||initial}catch(e){tasks=initial}
-let filter="all";
-const list=document.querySelector("#list");
+let tasks=[];
+try{tasks=JSON.parse(localStorage.getItem("vayro_tasks")||"null")||starterTasks}catch(e){tasks=starterTasks}
+let activeFilter="all",mineOnly=false;
+const tasksBox=document.getElementById("tasks");
+const dialog=document.getElementById("taskDialog");
+const form=document.getElementById("taskForm");
+function save(){try{localStorage.setItem("vayro_tasks",JSON.stringify(tasks))}catch(e){}}
 function render(){
-list.innerHTML="";
-const visible=tasks.filter(t=>filter==="all"||t.type===filter);
-if(!visible.length){list.textContent="Пока нет заданий в этой категории.";return}
-visible.forEach(t=>{
-const card=document.createElement("article");card.className="task";
-const title=document.createElement("h3");title.textContent=t.title;
-const desc=document.createElement("p");desc.textContent=t.description;
-const meta=document.createElement("div");meta.className="meta";
-const city=document.createElement("span");city.textContent="📍 "+t.city;
-const type=document.createElement("span");type.className="badge";type.textContent=t.type==="free"?"Бесплатно":"Платное";
-const price=document.createElement("div");price.className="price";price.textContent=t.type==="free"?"Без оплаты":Number(t.price||0)+" ₽";
-const btn=document.createElement("button");btn.textContent="Откликнуться";
-btn.onclick=()=>alert("Это демонстрационный прототип VAYRO. Для реальных откликов понадобится сервер и аккаунты.");
-meta.append(city,type);card.append(title,desc,meta,price,document.createElement("br"),btn);list.append(card);
-});
+ const shown=tasks.filter(t=>(activeFilter==="all"||activeFilter===t.type||activeFilter===t.category)&&(!mineOnly||!t.demo));
+ document.getElementById("totalCount").textContent=tasks.length;
+ tasksBox.innerHTML="";
+ if(!shown.length){tasksBox.innerHTML='<div class="empty">Заданий пока нет. Можно разместить первое!</div>';return}
+ shown.forEach(t=>{
+  const article=document.createElement("article");article.className="task";
+  const top=document.createElement("div");top.className="task-top";
+  const heading=document.createElement("h3");heading.textContent=t.title;
+  const price=document.createElement("div");price.className="price";price.textContent=t.type==="paid"?Number(t.price).toLocaleString("ru-RU")+" ₽":"Бесплатно";
+  top.append(heading,price);
+  const desc=document.createElement("p");desc.textContent=t.description;
+  const meta=document.createElement("div");meta.className="meta";
+  const city=document.createElement("span");city.textContent="⌖ "+t.city;
+  const category=document.createElement("span");category.textContent=({transport:"Транспорт",home:"По дому",other:"Другое"})[t.category]||"Другое";
+  meta.append(city,category);
+  const bottom=document.createElement("div");bottom.className="task-bottom";
+  const kind=document.createElement("span");kind.className="kind";kind.textContent=t.demo?"ПРИМЕР":"ВАШЕ ЗАДАНИЕ";
+  const reply=document.createElement("button");reply.className="respond";reply.textContent="Откликнуться";
+  reply.addEventListener("click",()=>alert("Это демонстрационная версия VAYRO. Настоящие сообщения и отклики подключим на следующем этапе."));
+  bottom.append(kind,reply);article.append(top,desc,meta,bottom);tasksBox.append(article);
+ });
 }
-document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{
-filter=b.dataset.filter;
-document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));
-render();
-}));
-document.querySelector("#taskForm").addEventListener("submit",e=>{
-e.preventDefault();const f=new FormData(e.target);
-tasks.unshift({title:f.get("title"),description:f.get("description"),city:f.get("city"),type:f.get("type"),price:Number(f.get("price")||0)});
-try{localStorage.setItem("vayroTasks",JSON.stringify(tasks))}catch(err){}
-render();document.querySelector("#create").close();e.target.reset();document.querySelector("#tasks").scrollIntoView({behavior:"smooth"});
+function openForm(){form.reset();document.getElementById("priceField").hidden=true;dialog.showModal()}
+document.getElementById("addTop").addEventListener("click",openForm);
+document.getElementById("browse").addEventListener("click",()=>document.getElementById("board").scrollIntoView({behavior:"smooth"}));
+document.getElementById("cancel").addEventListener("click",()=>dialog.close());
+document.getElementById("myTasks").addEventListener("click",()=>{
+ mineOnly=!mineOnly;document.getElementById("myTasks").textContent=mineOnly?"Все задания":"Мои объявления";render();document.getElementById("board").scrollIntoView({behavior:"smooth"});
+});
+document.getElementById("type").addEventListener("change",e=>document.getElementById("priceField").hidden=e.target.value!=="paid");
+document.getElementById("filters").addEventListener("click",e=>{
+ const btn=e.target.closest("[data-filter]");if(!btn)return;
+ activeFilter=btn.dataset.filter;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===btn));render();
+});
+form.addEventListener("submit",e=>{
+ e.preventDefault();
+ const type=document.getElementById("type").value;
+ const price=Number(document.getElementById("price").value||0);
+ if(type==="paid"&&price<=0){alert("Укажи сумму оплаты.");return}
+ tasks.unshift({
+ id:Date.now(),title:document.getElementById("title").value.trim(),
+ description:document.getElementById("description").value.trim(),
+ city:document.getElementById("city").value.trim(),type,
+ price:type==="paid"?price:0,category:document.getElementById("category").value,demo:false
+ });
+ save();mineOnly=false;document.getElementById("myTasks").textContent="Мои объявления";
+ activeFilter="all";document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
+ dialog.close();render();
 });
 render();
 </script>
 </body>
 </html>
+
