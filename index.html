@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F5132">
+<title>VAYRO — Помощь ближе</title>
+<style>
+:root{--green:#0F5132;--mint:#4CAF7A;--bg:#FAFAF8;--text:#17251d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{background:var(--green);color:white;padding:25px 18px 30px;border-radius:0 0 24px 24px}
+nav{display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:800;letter-spacing:2px}
+.tag{font-size:12px;opacity:.8}
+h1{font-size:28px;line-height:1.2;margin:28px 0 8px}
+header p{color:#e0eee5;font-size:14px;line-height:1.5}
+main{max-width:650px;margin:auto;padding:20px 16px}
+.actions{display:flex;gap:10px;margin:18px 0}
+button{border:0;border-radius:12px;padding:13px 15px;font-weight:700;font-size:14px;cursor:pointer}
+.primary{background:var(--mint);color:#082d1b}
+.secondary{background:white;color:var(--green);border:1px solid #dce7df}
+.filters{display:flex;gap:8px;overflow:auto;margin:20px 0}
+.filters button{white-space:nowrap;background:#eee}
+.filters button.active{background:var(--green);color:white}
+h2{font-size:20px}
+.task{background:white;border:1px solid #e7e9e5;border-radius:16px;padding:16px;margin:12px 0}
+.task h3{margin:0 0 8px;font-size:17px}
+.task p{font-size:14px;line-height:1.5;color:#59645c}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#68756b;margin:12px 0}
+.price{font-weight:800;color:var(--green);font-size:15px}
+.badge{background:#e5f4e9;color:var(--green);padding:5px 8px;border-radius:8px;font-size:11px}
+.task button{width:100%;background:#edf5ef;color:var(--green)}
+footer{text-align:center;color:#758078;font-size:12px;padding:25px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #d8ded8;border-radius:10px;margin:7px 0 12px;font:inherit}
+label{font-size:13px;font-weight:700}
+dialog{width:calc(100% - 30px);max-width:440px;border:0;border-radius:18px;padding:22px}
+dialog::backdrop{background:#0008}
+</style>
+</head>
+<body>
+<header>
+<nav><div class="logo">VAYRO</div><div class="tag">ПОМОЩЬ БЛИЖЕ</div></nav>
+<h1>Помощь рядом.<br>Возможности для каждого.</h1>
+<p>Находи помощь, помогай другим и выполняй задания за вознаграждение.</p>
+<div class="actions">
+<button class="primary" onclick="document.querySelector('#create').showModal()">+ Создать задание</button>
+<button class="secondary" onclick="document.querySelector('#tasks').scrollIntoView({behavior:'smooth'})">Найти помощь</button>
+</div>
+</header>
+<main id="tasks">
+<h2>Задания рядом</h2>
+<div class="filters">
+<button class="active" data-filter="all">Все</button>
+<button data-filter="free">Бесплатные</button>
+<button data-filter="paid">Платные</button>
+</div>
+<div id="list"></div>
+</main>
+<footer>VAYRO © 2026 · Помощь ближе</footer>
+
+<dialog id="create">
+<h2>Новое задание</h2>
+<form id="taskForm">
+<label>Название</label><input name="title" required maxlength="80" placeholder="Например, помочь донести вещи">
+<label>Описание</label><textarea name="description" required maxlength="500" placeholder="Что нужно сделать?"></textarea>
+<label>Город</label><input name="city" required placeholder="Например, Курчалой">
+<label>Тип задания</label>
+<select name="type"><option value="free">Бесплатная помощь</option><option value="paid">За вознаграждение</option></select>
+<label>Вознаграждение (₽, если платное)</label><input name="price" type="number" min="0" placeholder="500">
+<div class="actions"><button class="primary" type="submit">Опубликовать</button><button class="secondary" type="button" onclick="document.querySelector('#create').close()">Отмена</button></div>
+</form>
+</dialog>
+<script>
+const initial=[
+{title:"Помочь донести покупки",description:"Нужно помочь пожилому человеку донести пакеты до дома.",city:"Курчалой",type:"free",price:0},
+{title:"Помощь с переездом",description:"Нужен человек на пару часов, чтобы перенести коробки.",city:"Курчалой",type:"paid",price:1000},
+{title:"Купить продукты соседу",description:"Купить продукты по списку и принести по адресу.",city:"Курчалой",type:"paid",price:500}
+];
+let tasks;
+try{tasks=JSON.parse(localStorage.getItem("vayroTasks"))||initial}catch(e){tasks=initial}
+let filter="all";
+const list=document.querySelector("#list");
+function render(){
+list.innerHTML="";
+const visible=tasks.filter(t=>filter==="all"||t.type===filter);
+if(!visible.length){list.textContent="Пока нет заданий в этой категории.";return}
+visible.forEach(t=>{
+const card=document.createElement("article");card.className="task";
+const title=document.createElement("h3");title.textContent=t.title;
+const desc=document.createElement("p");desc.textContent=t.description;
+const meta=document.createElement("div");meta.className="meta";
+const city=document.createElement("span");city.textContent="📍 "+t.city;
+const type=document.createElement("span");type.className="badge";type.textContent=t.type==="free"?"Бесплатно":"Платное";
+const price=document.createElement("div");price.className="price";price.textContent=t.type==="free"?"Без оплаты":Number(t.price||0)+" ₽";
+const btn=document.createElement("button");btn.textContent="Откликнуться";
+btn.onclick=()=>alert("Это демонстрационный прототип VAYRO. Для реальных откликов понадобится сервер и аккаунты.");
+meta.append(city,type);card.append(title,desc,meta,price,document.createElement("br"),btn);list.append(card);
+});
+}
+document.querySelectorAll("[data-filter]").forEach(b=>b.addEventListener("click",()=>{
+filter=b.dataset.filter;
+document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));
+render();
+}));
+document.querySelector("#taskForm").addEventListener("submit",e=>{
+e.preventDefault();const f=new FormData(e.target);
+tasks.unshift({title:f.get("title"),description:f.get("description"),city:f.get("city"),type:f.get("type"),price:Number(f.get("price")||0)});
+try{localStorage.setItem("vayroTasks",JSON.stringify(tasks))}catch(err){}
+render();document.querySelector("#create").close();e.target.reset();document.querySelector("#tasks").scrollIntoView({behavior:"smooth"});
+});
+render();
+</script>
+</body>
+</html>
